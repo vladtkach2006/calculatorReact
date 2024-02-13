@@ -26,12 +26,11 @@ export default function App() {
 
 	function handleNumberClick(num) {
 		setIsResult(false)
-		const numberStr = String(num)
-		if (numberStr === '0' && operand1 === '0') return
+		if (num === '0' && operand1 === '0') return
 		if (!operator) {
-			setOperand1(operand1 + numberStr)
+			setOperand1(operand1 + num)
 		} else if (operator) {
-			setOperand2(operand2 + numberStr)
+			setOperand2(operand2 + num)
 		}
 	}
 
@@ -84,7 +83,7 @@ export default function App() {
 							return (
 								<button
 									className={classes.number}
-									onClick={() => handleNumberClick(Number(value))}
+									onClick={() => handleNumberClick(value)}
 									key={value}
 								>
 									{value}
