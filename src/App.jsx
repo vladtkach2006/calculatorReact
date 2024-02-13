@@ -7,8 +7,22 @@ export default function App() {
 	const [operand2, setOperand2] = useState('')
 	const [isResult, setIsResult] = useState(false)
 
-	const nums = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
-	const operations = ['C', '-', '+', '=']
+	const elements = [
+		{ type: 'num', value: 7 },
+		{ type: 'num', value: 8 },
+		{ type: 'num', value: 9 },
+		{ type: 'num', value: 4 },
+		{ type: 'num', value: 5 },
+		{ type: 'num', value: 6 },
+		{ type: 'num', value: 1 },
+		{ type: 'num', value: 2 },
+		{ type: 'num', value: 3 },
+		{ type: 'num', value: 0 },
+		{ type: 'operator', value: 'C' },
+		{ type: 'operator', value: '-' },
+		{ type: 'operator', value: '+' },
+		{ type: 'operator', value: '=' }
+	]
 
 	function handleNumberClick(num) {
 		setIsResult(false)
@@ -65,26 +79,34 @@ export default function App() {
 			</div>
 			<div className={classes.button}>
 				<div className={classes.numbers}>
-					{nums.map(num => (
-						<button
-							className={classes.number}
-							onClick={() => handleNumberClick(num)}
-							key={num}
-						>
-							{num}
-						</button>
-					))}
+					{elements.map(({ type, value }) => {
+						if (type === 'num') {
+							return (
+								<button
+									className={classes.number}
+									onClick={() => handleNumberClick(Number(value))}
+									key={value}
+								>
+									{value}
+								</button>
+							)
+						}
+					})}
 				</div>
 				<div className={classes.operations}>
-					{operations.map(operation => (
-						<button
-							className={classes.operationsBtn}
-							onClick={() => handleOperationClick(operation)}
-							key={operation}
-						>
-							{operation}
-						</button>
-					))}
+					{elements.map(({ type, value }) => {
+						if (type === 'operator') {
+							return (
+								<button
+									className={classes.operationsBtn}
+									onClick={() => handleOperationClick(value)}
+									key={value}
+								>
+									{value}
+								</button>
+							)
+						}
+					})}
 				</div>
 			</div>
 		</div>
